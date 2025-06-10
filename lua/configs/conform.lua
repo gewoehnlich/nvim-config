@@ -3,6 +3,7 @@ local options = {
     lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
+    -- php = { "intelephense" },
   },
 
   -- format_on_save = {
