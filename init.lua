@@ -40,6 +40,24 @@ require("lspconfig").clangd.setup({
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
 });
 
+require("lspconfig").pyright.setup({
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "strict",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "workspace"
+      }
+    }
+  }
+})
+
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "python" },
+  highlight = { enable = true }
+})
+
 require("lspconfig").intelephense.setup({
 	settings = {
 		intelephense = {
