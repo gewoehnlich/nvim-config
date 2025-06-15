@@ -21,12 +21,13 @@ require("lazy").setup({
     import = "nvchad.plugins",
   },
   { "williamboman/mason.nvim" },
-  { "jose-elias-alvarez/null-ls.nvim" },
+  { "nvimtools/none-ls.nvim" },
 
   { import = "plugins" },
 }, lazy_config)
 
 require("mason").setup()
+
 require("lspconfig").clangd.setup({
   cmd = { "clangd", "--background-index", "--clang-tidy"},
   filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -38,6 +39,7 @@ require("lspconfig").clangd.setup({
   root_dir = require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
 });
+
 require("lspconfig").intelephense.setup({
 	settings = {
 		intelephense = {
@@ -49,10 +51,10 @@ require("lspconfig").intelephense.setup({
 	}
 })
 
-local null_ls = require("null-ls")
-null_ls.setup({
+local none_ls = require("null-ls")
+none_ls.setup({
 	sources = {
-		null_ls.builtins.diagnostics.phpcs.with({
+		none_ls.builtins.diagnostics.phpcs.with({
 			extra_args = { "--standard=PSR12" }
 		})
 	}
@@ -76,10 +78,17 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+-- php
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "php" },
   callback = function()
     vim.opt.commentstring = "// %s"
+    vim.bo.shiftwidth = 4 
+    vim.bo.tabstop = 4 
+    vim.bo.softtabstop = 4 
+    vim.bo.expandtab = true
+    vim.bo.autoindent = true
+    vim.bo.smartindent = true
   end
 })
 
