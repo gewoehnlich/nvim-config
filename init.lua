@@ -110,6 +110,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "Makefile" },
+  callback = function()
+    vim.bo.shiftwidth = 4 
+    vim.bo.tabstop = 4 
+    vim.bo.softtabstop = 4 
+    vim.bo.expandtab = false
+  end
+})
+
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
