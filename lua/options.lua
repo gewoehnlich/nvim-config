@@ -4,5 +4,5 @@ require "nvchad.options"
 
 -- local o = vim.o
 vim.o.cursorlineopt = 'both' -- to enable cursorline!
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "80"
 vim.opt.relativenumber = true;
