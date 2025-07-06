@@ -28,6 +28,11 @@ require("lazy").setup({
 
 require("mason").setup()
 
+-- local lspconfig = require("lspconfig")
+-- lspconfig.html.setup({})
+-- lspconfig.cssls.setup({})
+-- lspconfig.ts_ls.setup({})
+
 require("lspconfig").clangd.setup({
   cmd = { "clangd", "--background-index", "--clang-tidy"},
   filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -73,9 +78,27 @@ local none_ls = require("null-ls")
 none_ls.setup({
 	sources = {
 		none_ls.builtins.diagnostics.phpcs.with({
-			extra_args = { "--standard=PSR12" }
+      filetypes = { "php" },
+			extra_args = { 
+        "--standard=PSR12",
+        -- "--sniffs=Generic.Files.LineLength",
+        -- "--runtime-set", "lineLimit", "80",
+        -- "--runtime-set", "absoluteLineLimit", "0"
+      }
 		})
 	}
+})
+
+require("conform").setup({
+  formatters_by_ft = {
+    html = { "prettierd" },
+    css = { "prettierd" },
+    javascript = { "prettierd" },
+    typescript = { "prettierd" },
+    json = { "prettierd" },
+    yaml = { "prettierd" },
+    markdown = { "prettierd" },
+  }
 })
 
 require("nvim-tree").setup({
