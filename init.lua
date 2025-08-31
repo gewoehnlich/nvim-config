@@ -22,7 +22,6 @@ require("lazy").setup({
   },
   { "williamboman/mason.nvim" },
   { "nvimtools/none-ls.nvim" },
-
   { import = "plugins" },
 }, lazy_config)
 
@@ -85,7 +84,23 @@ none_ls.setup({
         -- "--runtime-set", "lineLimit", "80",
         -- "--runtime-set", "absoluteLineLimit", "0"
       }
-		})
+		}),
+    none_ls.builtins.diagnostics.mypy.with({
+      command = "./.venv/bin/mypy",
+      args = {
+        "--show-column-numbers",
+        "$FILENAME"
+      }
+    }),
+    none_ls.builtins.diagnostics.pylint.with({
+      command = "./.venv/bin/pylint",
+      args = {
+        "--from-stdin", "$FILENAME",
+        "-f", "json",
+        "--enable=all",
+      },
+      to_stdin = true,
+    }),
 	}
 })
 
