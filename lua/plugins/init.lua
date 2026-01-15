@@ -35,4 +35,6 @@ return {
       }
   	},
   },
+  { "nvimtools/none-ls.nvim" },
+  { "NMAC427/guess-indent.nvim" },
 }
