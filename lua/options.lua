@@ -1,8 +1,7 @@
-require "nvchad.options"
+require("nvchad.options")
 
 -- add yours here!
 
--- local o = vim.o
-vim.o.cursorlineopt = 'both' -- to enable cursorline!
+vim.o.cursorlineopt = "both"
 vim.opt.colorcolumn = "80"
-vim.opt.relativenumber = true;
+vim.opt.relativenumber = true

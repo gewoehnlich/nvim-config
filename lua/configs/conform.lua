@@ -1,16 +1,15 @@
 local options = {
-  formatters_by_ft = {
-    lua = { "stylua" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
-    -- php = { "intelephense" },
-  },
-
-  -- format_on_save = {
-  --   -- These options will be passed to conform.format()
-  --   timeout_ms = 500,
-  --   lsp_fallback = true,
-  -- },
+    formatters_by_ft = {
+        lua = { "stylua" },
+        php = { "pint", "php-cs-fixer" },
+        html = { "prettierd" },
+        css = { "prettierd" },
+        javascript = { "prettierd" },
+        typescript = { "prettierd" },
+        json = { "prettierd" },
+        yaml = { "prettierd" },
+        markdown = { "prettierd" },
+    },
 }
 
 return options
