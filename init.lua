@@ -123,6 +123,9 @@ none_ls.setup({
             },
             to_stdin = true,
         }),
+        none_ls.builtins.diagnostics.hadolint.with({
+            filetypes = { "dockerfile" },
+        }),
     },
 })
 
@@ -139,6 +142,9 @@ require("nvim-tree").setup({
     git = {
         enable = true,
         ignore = false,
+    },
+    update_focused_file = {
+        enable = true,
     },
 })
 
@@ -247,7 +253,30 @@ vim.lsp.config("lua_ls", {
     },
 })
 
--- require("guess-indent").setup({})
+require("guess-indent").setup({
+  auto_cmd = true,  -- Set to false to disable automatic execution
+  override_editorconfig = false, -- Set to true to override settings set by .editorconfig
+  filetype_exclude = {  -- A list of filetypes for which the auto command gets disabled
+    "netrw",
+    "tutor",
+  },
+  buftype_exclude = {  -- A list of buffer types for which the auto command gets disabled
+    "help",
+    "nofile",
+    "terminal",
+    "prompt",
+  },
+  on_tab_options = { -- A table of vim options when tabs are detected 
+    ["expandtab"] = false,
+  },
+  on_space_options = { -- A table of vim options when spaces are detected 
+    ["expandtab"] = true,
+    ["tabstop"] = "detected", -- If the option value is 'detected', The value is set to the automatically detected indent size.
+    ["softtabstop"] = "detected",
+    ["shiftwidth"] = "detected",
+  },
+})
+
 require("gitsigns").setup({
     signs = {
         add = { text = "┃" },
@@ -269,7 +298,7 @@ require("gitsigns").setup({
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
     linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-    word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
+    word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
     culhl = true,
     watch_gitdir = {
         follow_files = true,
@@ -298,3 +327,4 @@ require("gitsigns").setup({
         col = 1,
     },
 })
+
