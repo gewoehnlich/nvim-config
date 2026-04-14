@@ -72,15 +72,6 @@ vim.lsp.config("basedpyright", {
 })
 vim.lsp.enable("basedpyright")
 
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "python",
-        "yaml",
-    },
-    highlight = { enable = true },
-    indent = { enable = true },
-})
-
 vim.lsp.config("intelephense", {
     settings = {
         intelephense = {
