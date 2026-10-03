@@ -30,6 +30,7 @@ return {
                 "typescript",
                 "php",
                 "blade",
+                "python",
             },
             highlight = {
                 enable = true,

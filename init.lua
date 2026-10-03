@@ -41,23 +41,6 @@ require("lazy").setup({
     { import = "plugins" },
 }, lazy_config)
 
-vim.lsp.config("clangd", {
-    cmd = { "clangd", "--background-index", "--clang-tidy" },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
-    init_options = {
-        clangdFileStatus = true,
-        usePlaceholders = true,
-        completeUnimported = true,
-    },
-    root_dir = require("lspconfig.util").root_pattern(
-        "compile_commands.json",
-        "compile_flags.txt",
-        ".git"
-    ),
-    capabilities = require("cmp_nvim_lsp").default_capabilities(),
-})
-vim.lsp.enable("clangd")
-
 vim.lsp.config("basedpyright", {
     settings = {
         python = {
@@ -120,10 +103,7 @@ none_ls.setup({
     },
 })
 
-local conform_config = require("configs.conform")
-require("conform").setup({
-    --
-}, conform_config)
+require("conform").setup(require("configs.conform"))
 
 require("nvim-tree").setup({
     filters = {
@@ -137,34 +117,6 @@ require("nvim-tree").setup({
     update_focused_file = {
         enable = true,
     },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "vue" },
-    callback = function()
-        vim.defer_fn(function()
-            vim.opt.commentstring = "<!-- %s -->"
-            vim.opt_local.shiftwidth = 4
-            vim.opt_local.tabstop = 4
-            vim.opt_local.softtabstop = 4
-            vim.opt_local.expandtab = true
-            vim.opt_local.autoindent = true
-            vim.opt_local.smartindent = true
-        end, 10)
-    end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "php" },
-    callback = function()
-        vim.opt.commentstring = "// %s"
-        vim.bo.shiftwidth = 4
-        vim.bo.tabstop = 4
-        vim.bo.softtabstop = 4
-        vim.bo.expandtab = true
-        vim.bo.autoindent = true
-        vim.bo.smartindent = true
-    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -188,6 +140,13 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         vim.bo.expandtab = false
     end,
 })
+
+vim.g.python_indent = {
+    open_paren = "shiftwidth()",
+    nested_paren = "shiftwidth()",
+    continue = "shiftwidth()",
+    closed_paren_align_last_line = false,
+}
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
@@ -244,30 +203,6 @@ vim.lsp.config("lua_ls", {
     },
 })
 
-require("guess-indent").setup({
-  auto_cmd = true,  -- Set to false to disable automatic execution
-  override_editorconfig = false, -- Set to true to override settings set by .editorconfig
-  filetype_exclude = {  -- A list of filetypes for which the auto command gets disabled
-    "netrw",
-    "tutor",
-  },
-  buftype_exclude = {  -- A list of buffer types for which the auto command gets disabled
-    "help",
-    "nofile",
-    "terminal",
-    "prompt",
-  },
-  on_tab_options = { -- A table of vim options when tabs are detected 
-    ["expandtab"] = false,
-  },
-  on_space_options = { -- A table of vim options when spaces are detected 
-    ["expandtab"] = true,
-    ["tabstop"] = "detected", -- If the option value is 'detected', The value is set to the automatically detected indent size.
-    ["softtabstop"] = "detected",
-    ["shiftwidth"] = "detected",
-  },
-})
-
 require("gitsigns").setup({
     signs = {
         add = { text = "┃" },
@@ -318,4 +253,3 @@ require("gitsigns").setup({
         col = 1,
     },
 })
-
