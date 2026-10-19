@@ -29,6 +29,7 @@ return {
                 "javascript",
                 "typescript",
                 "php",
+                "php_only",
                 "blade",
                 "python",
             },

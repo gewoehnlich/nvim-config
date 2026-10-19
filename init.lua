@@ -41,14 +41,15 @@ require("lazy").setup({
     { import = "plugins" },
 }, lazy_config)
 
+-- https://docs.basedpyright.com/latest/configuration/language-server-settings/#based-settings
 vim.lsp.config("basedpyright", {
     settings = {
-        python = {
+        basedpyright = {
             analysis = {
-                typeCheckingMode = "strict",
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
-                diagnosticMode = "strict",
+                diagnosticMode = "openFilesOnly",
+                inlayHints = {
+                    callArgumentNamesMatching = true,
+                },
             },
         },
     },
@@ -252,4 +253,16 @@ require("gitsigns").setup({
         row = 0,
         col = 1,
     },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "php" },
+    callback = function()
+        vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
+        vim.bo.softtabstop = 4
+        vim.bo.expandtab = true
+        vim.bo.autoindent = true
+        vim.bo.smartindent = true
+    end,
 })
