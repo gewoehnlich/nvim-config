@@ -264,5 +264,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.expandtab = true
         vim.bo.autoindent = true
         vim.bo.smartindent = true
+        vim.bo.commentstring = "// %s"
     end,
 })
